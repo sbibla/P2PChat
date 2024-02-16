@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "F167DAF1-BE45-48AD-B4F2-C7C4D56DF085"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "333BC4CF-9AC7-4E1C-A772-2718BAD0E388"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LBTAFireBaseChat/MainMessages/MainMessagesView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "274"
+            endingLineNumber = "274"
+            landmarkName = "MainMessagesView"
+            landmarkType = "14">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7E18F808-D4C1-4AEF-ADD0-F82A792C1897"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LBTAFireBaseChat/Gamification/MathQuestionBuilder.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "generateMultiplicationEquation(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "7E18F808-D4C1-4AEF-ADD0-F82A792C1897 - 5139f5fdf8638741"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "LBTAFireBaseChat.MathQuestionBuilder.generateMultipicationEquation(Swift.Int) -&gt; (Swift.String, Swift.Int, Swift.Int, Swift.Int, Swift.Int)"
+                  moduleName = "LBTAFireBaseChat"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sbiblasprintray/Library/Mobile%20Documents/com~apple~CloudDocs/Coding/LBTAFireBaseChat/LBTAFireBaseChat/Gamification/MathQuestionBuilder.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "38"
+                  endingLineNumber = "38"
+                  offsetFromSymbolStart = "1228">
+               </Location>
+               <Location
+                  uuid = "7E18F808-D4C1-4AEF-ADD0-F82A792C1897 - 5139f5fdf8638762"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "LBTAFireBaseChat.MathQuestionBuilder.generateMultipicationEquation(Swift.Int) -&gt; (Swift.String, Swift.Int, Swift.Int, Swift.Int, Swift.Int)"
+                  moduleName = "LBTAFireBaseChat"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sbiblasprintray/Library/Mobile%20Documents/com~apple~CloudDocs/Coding/LBTAFireBaseChat/LBTAFireBaseChat/Gamification/MathQuestionBuilder.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "39"
+                  endingLineNumber = "39"
+                  offsetFromSymbolStart = "1240">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "17346BD3-18BB-4339-A767-0A15DDEF2685"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LBTAFireBaseChat/Gamification/MathQuestionBuilder.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "generateMultiplicationEquation(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "044E2D2D-1A1F-46B9-94F3-261A77D431AA"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LBTAFireBaseChat/MainMessages/NewMessage/CreateNewMessageView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "fetchAllUsers()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "93136476-4912-4713-95AF-A6FCF99D4847"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LBTAFireBaseChat/MainMessages/Chat/ChatLogView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "224"
+            endingLineNumber = "224"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EF210748-FA55-4D4F-B55D-46D64E67B027"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LBTAFireBaseChat/Gamification/GamificationView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "148"
+            endingLineNumber = "148"
+            landmarkName = "GamificationView"
+            landmarkType = "14">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
