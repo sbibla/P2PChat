@@ -79,48 +79,52 @@ struct LoginView: View {
                         }
                     }
                     
-                    
-                    TextField("Email", text: $emailAddress, onEditingChanged: { (isChanged) in
-                        if !isChanged {
-                            if self.textFieldValidatorEmail(self.emailAddress) {
-                                print("Email is valid")
-                                self.isEmailValid = true
-                            } else {
-                                self.isEmailValid = false
-                                print("Invalid email")
-                                showingEmailAlert = true
-                                emailAddress = ""
+                        TextField("Email", text: $emailAddress, onEditingChanged: { (isChanged) in
+                            if !isChanged {
+                                if self.textFieldValidatorEmail(self.emailAddress) {
+                                    print("Email is valid")
+                                    self.isEmailValid = true
+                                } else {
+                                    self.isEmailValid = false
+                                    print("Invalid email")
+                                    showingEmailAlert = true
+                                    emailAddress = ""
+                                }
                             }
-                        }
-                    })
-                    .padding(12)
-                    .keyboardType(.emailAddress)
-                    .autocapitalization(.none)
-                    //                        .background(Color.white)
-                    .background(Color(UIColor.systemBackground))
-                    
-                    .font(.custom("San Francisco", size: 20))
-                    .onAppear {
-                        UITextField.appearance().clearButtonMode = .whileEditing
-                    }
-                    SecureField("Password", text: $emailPassword)
+                        })
                         .padding(12)
-                    //                        .background(Color.white)
+                        .keyboardType(.emailAddress)
+                        .autocapitalization(.none)
+                        .autocorrectionDisabled()
+                        //                        .background(Color.white)
                         .background(Color(UIColor.systemBackground))
+                        
                         .font(.custom("San Francisco", size: 20))
+                        .onAppear {
+                            UITextField.appearance().clearButtonMode = .whileEditing
+                        }
                     
-                    Button ( action: {handleAction()} ) {
-                        Spacer()
-                        Text(isLoginMode ? "Log In" : "Create Account")
-                            .foregroundColor(colorScheme == .dark ? .white : .black)
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 10)
+                        SecureField("Password", text: $emailPassword)
+                            .padding(12)
+                        //                        .background(Color.white)
+                            .background(Color(UIColor.systemBackground))
                             .font(.custom("San Francisco", size: 20))
-                        Spacer()
-                    }
-                    .buttonStyle(.bordered)
-                    .buttonBorderShape(.roundedRectangle(radius: 8))
-                 
+                            .autocapitalization(.none)
+                            .autocorrectionDisabled()
+                    
+                        Button ( action: {handleAction()} ) {
+                            Spacer()
+                            Text(isLoginMode ? "Log In" : "Create Account")
+                                .foregroundColor(colorScheme == .dark ? .white : .black)
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 10)
+                                .font(.custom("San Francisco", size: 20))
+                            Spacer()
+                        }
+                        .disabled(emailAddress.isEmpty || emailPassword.isEmpty)
+                        .buttonStyle(.bordered)
+                        .buttonBorderShape(.roundedRectangle(radius: 8))
+                    
                     if isLoginMode {
                             HStack{
                                 Color.gray.frame(height: 1 / UIScreen.main.scale)

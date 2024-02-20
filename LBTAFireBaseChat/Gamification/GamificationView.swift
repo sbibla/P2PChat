@@ -148,7 +148,7 @@ struct GamificationView: View {
 //            pmathDictionary[initmathDictionary[num]] = (-1,-1,-1,-1)
 //        }
 //    }
-//    
+//
     private func buildLevel(level: Int) {
         var resultOne, resultTwo, resultThree, resultLocation: Int
         var equation = ""
@@ -370,3 +370,4 @@ struct GamificationView: View {
 #Preview {
     GamificationView()
 }
+
