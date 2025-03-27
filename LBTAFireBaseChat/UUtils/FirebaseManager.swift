@@ -9,7 +9,7 @@ import Foundation
 import FirebaseFirestore
 import Firebase
 import FirebaseStorage
-
+import FirebaseAuth
 
 struct FirebaseConstants {
     static let uid = "uid"
