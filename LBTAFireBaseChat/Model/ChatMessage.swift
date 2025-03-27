@@ -15,4 +15,6 @@ struct ChatMessage: Codable, Identifiable {
     let timestamp: Date
     let allowForwardMsg: String
     let messageImageUrl: String?
+    let isForwarded: Bool?
+    let originalSender: String?
 }
