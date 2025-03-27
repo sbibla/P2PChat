@@ -8,7 +8,7 @@
 import SwiftUI
 import SDWebImageSwiftUI
 import Firebase
-import FirebaseFirestoreSwift
+import FirebaseFirestore
 
 class MainMessagesViewModel: ObservableObject {
     
