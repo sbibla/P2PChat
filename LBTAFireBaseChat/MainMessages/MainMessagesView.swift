@@ -105,6 +105,7 @@ struct MainMessagesView: View {
     @State private var shouldShowLogOutOptions = false
     @State private var shouldShowGame = false
     @State private var shouldNavigateToChatLogView = false
+    @State private var shouldShowSettings = false
     @ObservedObject private var vm = MainMessagesViewModel()
     
     private var chatLogViewModel = ChatLogViewModel(chatUser: nil)
@@ -215,6 +216,9 @@ struct MainMessagesView: View {
                     .font(.system(size: 24, weight: .bold))
                     .foregroundColor(.indigo)
             }
+            .sheet(isPresented: $shouldShowSettings) {
+                SettingsView()
+            }
         }
         .padding()
         .actionSheet(isPresented: $shouldShowLogOutOptions) {
@@ -223,10 +227,13 @@ struct MainMessagesView: View {
                     print("signing out")
                     vm.handleSignOut()
                 }),
-                .cancel(),
+                .default(Text("Settings"), action: {
+                    shouldShowSettings = true
+                }),
                 .default(Text("Gamify Me!"), action: {
                     shouldShowGame.toggle()
-                })
+                }),
+                .cancel()
             ])
         }
         .fullScreenCover(isPresented: $vm.isUserCurrentlyLoggedOut, onDismiss: nil) {

@@ -10,7 +10,8 @@ import Foundation
 struct ChatUser: Identifiable {
     
     var id: String { uid }
-    let uid, email, profileImageUrl, creationDate, lastMessageDate, messageCanForwared: String
+    let uid, email, profileImageUrl, creationDate, lastMessageDate: String
+    let messageCanForwared: String
     var isOnline: Bool
     
     //initializer that takes all the dictionalry data
@@ -20,7 +21,7 @@ struct ChatUser: Identifiable {
         self.email = data["email"] as? String ?? ""
         self.profileImageUrl = data["profileImageUrl"] as? String ?? ""
         self.lastMessageDate = data["lastMessageDate"] as? String ?? ""
-        self.messageCanForwared = data["messageCanForwared"] as? String ?? ""
+        self.messageCanForwared = data["messageCanForwared"] as? String ?? "N"
         self.isOnline = false
     }
 }

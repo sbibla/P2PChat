@@ -214,6 +214,10 @@ class ChatLogViewModel: ObservableObject {
 struct ChatLogView: View {
     
     @ObservedObject var vm: ChatLogViewModel
+    @State private var shouldShowImagePicker = false
+    @State private var shouldShowForwardSheet = false
+    @State private var selectedMessage: ChatMessage?
+    @State private var forwardViewModel = ForwardMessageViewModel()
     
     var body: some View {
         ZStack {
@@ -228,7 +232,6 @@ struct ChatLogView: View {
     }
     
     static let emptyScrollToString = "Empty"
-    @State private var shouldShowImagePicker = false
     
     private var messagesView: some View {
         VStack {
@@ -306,94 +309,47 @@ struct MessageView: View {
     let message: ChatMessage
     
     var body: some View {
-        VStack {
-            if message.fromId == FirebaseManager.shared.auth.currentUser?.uid {
-                if message.messageImageUrl != "" {
-                    HStack{
-                        Spacer()
-                        HStack{
-                            WebImage(url: URL(string: message.messageImageUrl ?? ""))
-                                .resizable()
-                                .frame(width: 180, height: 280)
-                                .cornerRadius(20)
-                        }
-                        .padding(2)
-                    }
+        HStack {
+            if message.isFromCurrentUser {
+                Spacer()
+            }
+            
+            VStack(alignment: message.isFromCurrentUser ? .trailing : .leading) {
+                if message.isForwarded {
+                    Text("Forwarded: \(message.originalSenderEmail ?? "")")
+                        .font(.caption)
+                        .foregroundColor(.gray)
                 }
-                HStack {
-                    Spacer()
-                    VStack(alignment: .trailing) {
-                        if message.isForwarded == true {
-                            HStack {
-                                Image(systemName: "arrowshape.turn.up.right.fill")
-                                    .font(.system(size: 12))
-                                Text("Forwarded")
-                                    .font(.system(size: 12))
-                                    .foregroundColor(.white.opacity(0.8))
-                            }
-                            .padding(.bottom, 2)
-                        }
-                        HStack {
-                            Text(message.text)
-                                .foregroundColor(.white)
-                            if message.allowForwardMsg == "Y" {
-                                Button {
-                                    shouldShowForwardSheet.toggle()
-                                } label: {
-                                    Image(systemName: "arrowshape.turn.up.right")
-                                        .foregroundColor(.white)
-                                }
-                            }
-                        }
+                
+                HStack(alignment: .bottom) {
+                    if !message.isFromCurrentUser {
+                        Text(message.text)
+                            .foregroundColor(.black)
                     }
-                    .padding(8)
-                    .background(Color.blue)
-                    .cornerRadius(10)
-                }.padding(2)
-            } else {
-                if message.messageImageUrl != "" {
-                    HStack{
-                        HStack{
-                            WebImage(url: URL(string: message.messageImageUrl ?? ""))
-                                .resizable()
-                                .frame(width: 180, height: 280)
-                                .cornerRadius(20)
-                        }
-                        .padding(2)
-                        Spacer()
-                    }
-                }
-                HStack {
-                    VStack(alignment: .leading) {
-                        if message.isForwarded == true {
-                            HStack {
-                                Image(systemName: "arrowshape.turn.up.right.fill")
-                                    .font(.system(size: 12))
-                                Text("Forwarded")
-                                    .font(.system(size: 12))
-                                    .foregroundColor(.black.opacity(0.8))
-                            }
-                            .padding(.bottom, 2)
-                        }
-                        HStack {
-                            Text(message.text)
-                                .foregroundColor(.black)
-                            if message.allowForwardMsg == "Y" {
-                                Button {
-                                    shouldShowForwardSheet.toggle()
-                                } label: {
-                                    Image(systemName: "arrowshape.turn.up.right")
-                                        .foregroundColor(.black)
-                                }
-                            }
-                        }
-                    }
-                    .padding(8)
-                    .background(.white)
-                    .cornerRadius(10)
                     
-                    Spacer()
+                    if message.isFromCurrentUser && message.messageCanForwared == "Y" {
+                        Button {
+                            selectedMessage = message
+                            shouldShowForwardSheet = true
+                        } label: {
+                            Image(systemName: "arrowshape.turn.up.right")
+                                .foregroundColor(.white)
+                                .font(.system(size: 16))
+                        }
+                    }
+                    
+                    if message.isFromCurrentUser {
+                        Text(message.text)
+                            .foregroundColor(.white)
+                    }
                 }
+                .padding(10)
+                .background(message.isFromCurrentUser ? Color.blue : Color(.systemGray5))
+                .cornerRadius(20)
+            }
+            
+            if !message.isFromCurrentUser {
+                Spacer()
             }
         }
         .padding(.horizontal)
@@ -461,73 +417,88 @@ struct MessageView: View {
     }
     
     private func forwardMessage(to user: ChatUser) {
-        guard let fromId = FirebaseManager.shared.auth.currentUser?.uid else { return }
-        let toId = user.uid
+        guard let selectedMessage = selectedMessage else { return }
         
-        let document = FirebaseManager.shared.firestore
+        let messageData: [String: Any] = [
+            FirebaseConstants.text: "Forwarded: \(selectedMessage.text)",
+            FirebaseConstants.fromId: FirebaseManager.shared.auth.currentUser?.uid ?? "",
+            FirebaseConstants.toId: user.uid,
+            FirebaseConstants.timestamp: Timestamp(),
+            "isForwarded": true,
+            "originalSender": selectedMessage.fromId,
+            "originalSenderEmail": selectedMessage.fromId == FirebaseManager.shared.auth.currentUser?.uid ? FirebaseManager.shared.currentUser?.email : selectedMessage.originalSenderEmail,
+            "messageCanForwared": "Y"
+        ]
+        
+        // Save to sender's messages
+        let senderMessageDocument = FirebaseManager.shared.firestore
             .collection(FirebaseConstants.messages)
-            .document(fromId)
-            .collection(toId)
+            .document(FirebaseManager.shared.auth.currentUser?.uid ?? "")
+            .collection(user.uid)
             .document()
         
-        let messageData = [
-            FirebaseConstants.fromId: fromId,
-            FirebaseConstants.toId: toId,
-            FirebaseConstants.text: "Forwarded: \(message.text)",
-            FirebaseConstants.timestamp: Timestamp(),
-            FirebaseConstants.allowForwardMsg: "Y",
-            "messageImageUrl": message.messageImageUrl ?? "",
-            "isForwarded": true,
-            "originalSender": message.fromId
-        ] as [String : Any]
-        
-        document.setData(messageData) { error in
+        senderMessageDocument.setData(messageData) { error in
             if let error = error {
-                print("Failed to forward message: \(error)")
+                print(error)
+                self.errorMessage = "Failed to save message to sender firestore \(error)"
+                print(self.errorMessage)
                 return
             }
-            
-            // Save to recipient's messages
-            let recipientDocument = FirebaseManager.shared.firestore
-                .collection(FirebaseConstants.messages)
-                .document(toId)
-                .collection(fromId)
-                .document()
-            
-            recipientDocument.setData(messageData) { error in
+            print("Sender saved message")
+        }
+        
+        // Save to recipient's messages
+        let recipientMessageDocument = FirebaseManager.shared.firestore
+            .collection(FirebaseConstants.messages)
+            .document(user.uid)
+            .collection(FirebaseManager.shared.auth.currentUser?.uid ?? "")
+            .document()
+        
+        recipientMessageDocument.setData(messageData) { error in
+            if let error = error {
+                print(error)
+                self.errorMessage = "Failed to save message to recepient firestore \(error)"
+                print(self.errorMessage)
+                return
+            }
+            print("Recepient saved message as well")
+        }
+        
+        // Update recent messages
+        let recentMessageData: [String: Any] = [
+            FirebaseConstants.text: "Forwarded: \(selectedMessage.text)",
+            FirebaseConstants.timestamp: Timestamp(),
+            FirebaseConstants.email: user.email,
+            FirebaseConstants.profileImageUrl: user.profileImageUrl,
+            FirebaseConstants.fromId: FirebaseManager.shared.auth.currentUser?.uid ?? "",
+            FirebaseConstants.toId: user.uid
+        ]
+        
+        // Update sender's recent messages
+        FirebaseManager.shared.firestore
+            .collection(FirebaseConstants.recent_messages)
+            .document(FirebaseManager.shared.auth.currentUser?.uid ?? "")
+            .collection(FirebaseConstants.messages)
+            .document(user.uid)
+            .setData(recentMessageData) { error in
                 if let error = error {
-                    print("Failed to save forwarded message to recipient: \(error)")
+                    print(error)
                     return
                 }
-                
-                // Update recent messages
-                let recentMessageData = [
-                    FirebaseConstants.timestamp: Timestamp(),
-                    FirebaseConstants.text: "Forwarded: \(message.text)",
-                    FirebaseConstants.fromId: fromId,
-                    FirebaseConstants.toId: toId,
-                    FirebaseConstants.profileImageUrl: FirebaseManager.shared.currentUser?.profileImageUrl ?? "",
-                    FirebaseConstants.email: FirebaseManager.shared.currentUser?.email ?? "",
-                    "messageImageUrl": message.messageImageUrl ?? ""
-                ] as [String : Any]
-                
-                // Save to sender's recent messages
-                FirebaseManager.shared.firestore
-                    .collection(FirebaseConstants.recent_messages)
-                    .document(fromId)
-                    .collection(FirebaseConstants.messages)
-                    .document(toId)
-                    .setData(recentMessageData)
-                
-                // Save to recipient's recent messages
-                FirebaseManager.shared.firestore
-                    .collection(FirebaseConstants.recent_messages)
-                    .document(toId)
-                    .collection(FirebaseConstants.messages)
-                    .document(fromId)
-                    .setData(recentMessageData)
             }
-        }
+        
+        // Update recipient's recent messages
+        FirebaseManager.shared.firestore
+            .collection(FirebaseConstants.recent_messages)
+            .document(user.uid)
+            .collection(FirebaseConstants.messages)
+            .document(FirebaseManager.shared.auth.currentUser?.uid ?? "")
+            .setData(recentMessageData) { error in
+                if let error = error {
+                    print(error)
+                    return
+                }
+            }
     }
 }
 
