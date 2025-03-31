@@ -1,0 +1,81 @@
+[debug] [2025-03-31T23:18:47.751Z] ----------------------------------------------------------------------
+[debug] [2025-03-31T23:18:47.754Z] Command:       /opt/homebrew/Cellar/node/23.7.0/bin/node /opt/homebrew/bin/firebase init firestore
+[debug] [2025-03-31T23:18:47.754Z] CLI Version:   14.0.1
+[debug] [2025-03-31T23:18:47.754Z] Platform:      darwin
+[debug] [2025-03-31T23:18:47.754Z] Node Version:  v23.7.0
+[debug] [2025-03-31T23:18:47.754Z] Time:          Mon Mar 31 2025 16:18:47 GMT-0700 (Pacific Daylight Time)
+[debug] [2025-03-31T23:18:47.754Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-03-31T23:18:47.759Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-03-31T23:18:47.759Z] > authorizing via signed-in user (saar.bibla@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /Users/sbiblasprintray/Programing/CursorChangesTesting/P2PChat
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2025-03-31T23:19:03.764Z] Checked if tokens are valid: true, expires at: 1743466643957
+[debug] [2025-03-31T23:19:03.764Z] Checked if tokens are valid: true, expires at: 1743466643957
+[debug] [2025-03-31T23:19:03.765Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=100
+[debug] [2025-03-31T23:19:04.270Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2025-03-31T23:19:04.270Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[info] i  Using project lbta-swiftui-firebase-ch-8d986 (LBTA SwiftUI Firebase Chat) 
+[info] 
+=== Firestore Setup
+[debug] [2025-03-31T23:19:19.919Z] Checked if tokens are valid: true, expires at: 1743466643957
+[debug] [2025-03-31T23:19:19.919Z] Checked if tokens are valid: true, expires at: 1743466643957
+[debug] [2025-03-31T23:19:19.919Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/lbta-swiftui-firebase-ch-8d986/services/firestore.googleapis.com [none]
+[debug] [2025-03-31T23:19:19.919Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/lbta-swiftui-firebase-ch-8d986/services/firestore.googleapis.com x-goog-quota-user=projects/lbta-swiftui-firebase-ch-8d986
+[debug] [2025-03-31T23:19:20.375Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/lbta-swiftui-firebase-ch-8d986/services/firestore.googleapis.com 200
+[debug] [2025-03-31T23:19:20.375Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/lbta-swiftui-firebase-ch-8d986/services/firestore.googleapis.com [omitted]
+[debug] [2025-03-31T23:19:20.375Z] Checked if tokens are valid: true, expires at: 1743466643957
+[debug] [2025-03-31T23:19:20.376Z] Checked if tokens are valid: true, expires at: 1743466643957
+[debug] [2025-03-31T23:19:20.376Z] >>> [apiv2][query] GET https://firestore.googleapis.com/v1/projects/lbta-swiftui-firebase-ch-8d986/databases/(default) [none]
+[debug] [2025-03-31T23:19:20.834Z] <<< [apiv2][status] GET https://firestore.googleapis.com/v1/projects/lbta-swiftui-firebase-ch-8d986/databases/(default) 200
+[debug] [2025-03-31T23:19:20.834Z] <<< [apiv2][body] GET https://firestore.googleapis.com/v1/projects/lbta-swiftui-firebase-ch-8d986/databases/(default) {"name":"projects/lbta-swiftui-firebase-ch-8d986/databases/(default)","uid":"60a42ad6-1708-4d21-8cb3-cab271063cc1","createTime":"2023-12-29T04:00:22.974460Z","updateTime":"2023-12-29T04:00:22.974460Z","locationId":"nam5","type":"FIRESTORE_NATIVE","concurrencyMode":"PESSIMISTIC","versionRetentionPeriod":"3600s","earliestVersionTime":"2025-03-31T22:19:20.810754Z","appEngineIntegrationMode":"ENABLED","keyPrefix":"s","pointInTimeRecoveryEnablement":"POINT_IN_TIME_RECOVERY_DISABLED","deleteProtectionState":"DELETE_PROTECTION_DISABLED","databaseEdition":"STANDARD","freeTier":true,"etag":"IM6VhLO6tYwDMIn2rp75qIwD"}
+[debug] [2025-03-31T23:19:20.834Z] database_type: FIRESTORE_NATIVE
+[debug] [2025-03-31T23:19:20.834Z] database_type: FIRESTORE_NATIVE
+[debug] [2025-03-31T23:19:20.835Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-03-31T23:19:20.835Z] > authorizing via signed-in user (saar.bibla@gmail.com)
+[debug] [2025-03-31T23:19:20.835Z] [iam] checking project lbta-swiftui-firebase-ch-8d986 for permissions ["firebase.projects.get"]
+[debug] [2025-03-31T23:19:20.836Z] Checked if tokens are valid: true, expires at: 1743466643957
+[debug] [2025-03-31T23:19:20.836Z] Checked if tokens are valid: true, expires at: 1743466643957
+[debug] [2025-03-31T23:19:20.836Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/lbta-swiftui-firebase-ch-8d986:testIamPermissions [none]
+[debug] [2025-03-31T23:19:20.836Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/lbta-swiftui-firebase-ch-8d986:testIamPermissions x-goog-quota-user=projects/lbta-swiftui-firebase-ch-8d986
+[debug] [2025-03-31T23:19:20.836Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/lbta-swiftui-firebase-ch-8d986:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2025-03-31T23:19:21.127Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/lbta-swiftui-firebase-ch-8d986:testIamPermissions 200
+[debug] [2025-03-31T23:19:21.127Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/lbta-swiftui-firebase-ch-8d986:testIamPermissions {"permissions":["firebase.projects.get"]}
+[info] 
+[info] Firestore Security Rules allow you to define how and when to allow
+[info] requests. You can keep these rules in your project directory
+[info] and publish them with firebase deploy.
+[info] 
+[debug] [2025-03-31T23:19:47.575Z] Checked if tokens are valid: true, expires at: 1743466643957
+[debug] [2025-03-31T23:19:47.575Z] Checked if tokens are valid: true, expires at: 1743466643957
+[debug] [2025-03-31T23:19:47.576Z] >>> [apiv2][query] GET https://firebaserules.googleapis.com/v1/projects/lbta-swiftui-firebase-ch-8d986/releases pageSize=10&pageToken=
+[debug] [2025-03-31T23:19:47.987Z] <<< [apiv2][status] GET https://firebaserules.googleapis.com/v1/projects/lbta-swiftui-firebase-ch-8d986/releases 200
+[debug] [2025-03-31T23:19:47.987Z] <<< [apiv2][body] GET https://firebaserules.googleapis.com/v1/projects/lbta-swiftui-firebase-ch-8d986/releases {"releases":[{"name":"projects/lbta-swiftui-firebase-ch-8d986/releases/cloud.firestore","rulesetName":"projects/lbta-swiftui-firebase-ch-8d986/rulesets/fce39f34-92b4-4e1c-b4bf-943552030e76","createTime":"2023-12-30T11:23:10.320725Z","updateTime":"2023-12-30T11:25:56.604636Z"},{"name":"projects/lbta-swiftui-firebase-ch-8d986/releases/firebase.storage/lbta-swiftui-firebase-ch-8d986.appspot.com","rulesetName":"projects/lbta-swiftui-firebase-ch-8d986/rulesets/66692034-a2ca-41cc-a026-324000d02399","createTime":"2023-12-29T04:00:45.135981Z","updateTime":"2025-03-27T21:58:01.751460Z"}]}
+[debug] [2025-03-31T23:19:47.987Z] Found ruleset: projects/lbta-swiftui-firebase-ch-8d986/rulesets/fce39f34-92b4-4e1c-b4bf-943552030e76
+[debug] [2025-03-31T23:19:47.988Z] Checked if tokens are valid: true, expires at: 1743466643957
+[debug] [2025-03-31T23:19:47.988Z] Checked if tokens are valid: true, expires at: 1743466643957
+[debug] [2025-03-31T23:19:47.988Z] >>> [apiv2][query] GET https://firebaserules.googleapis.com/v1/projects/lbta-swiftui-firebase-ch-8d986/rulesets/fce39f34-92b4-4e1c-b4bf-943552030e76 [none]
+[debug] [2025-03-31T23:19:48.293Z] <<< [apiv2][status] GET https://firebaserules.googleapis.com/v1/projects/lbta-swiftui-firebase-ch-8d986/rulesets/fce39f34-92b4-4e1c-b4bf-943552030e76 200
+[debug] [2025-03-31T23:19:48.293Z] <<< [apiv2][body] GET https://firebaserules.googleapis.com/v1/projects/lbta-swiftui-firebase-ch-8d986/rulesets/fce39f34-92b4-4e1c-b4bf-943552030e76 [omitted]
+[info] 
+[info] Firestore indexes allow you to perform complex queries while
+[info] maintaining performance that scales with the size of the result
+[info] set. You can keep index definitions in your project directory
+[info] and publish them with firebase deploy.
+[info] 

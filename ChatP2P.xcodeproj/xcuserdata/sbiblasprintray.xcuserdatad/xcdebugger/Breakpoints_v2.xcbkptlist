@@ -16,8 +16,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "274"
             endingLineNumber = "274"
-            landmarkName = "MainMessagesView"
-            landmarkType = "14">
+            landmarkName = "newMessageButton"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -34,38 +34,6 @@
             endingLineNumber = "41"
             landmarkName = "generateMultiplicationEquation(_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "7E18F808-D4C1-4AEF-ADD0-F82A792C1897 - 5139f5fdf8638741"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "LBTAFireBaseChat.MathQuestionBuilder.generateMultipicationEquation(Swift.Int) -&gt; (Swift.String, Swift.Int, Swift.Int, Swift.Int, Swift.Int)"
-                  moduleName = "LBTAFireBaseChat"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/sbiblasprintray/Library/Mobile%20Documents/com~apple~CloudDocs/Coding/LBTAFireBaseChat/LBTAFireBaseChat/Gamification/MathQuestionBuilder.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "38"
-                  endingLineNumber = "38"
-                  offsetFromSymbolStart = "1228">
-               </Location>
-               <Location
-                  uuid = "7E18F808-D4C1-4AEF-ADD0-F82A792C1897 - 5139f5fdf8638762"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "LBTAFireBaseChat.MathQuestionBuilder.generateMultipicationEquation(Swift.Int) -&gt; (Swift.String, Swift.Int, Swift.Int, Swift.Int, Swift.Int)"
-                  moduleName = "LBTAFireBaseChat"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/sbiblasprintray/Library/Mobile%20Documents/com~apple~CloudDocs/Coding/LBTAFireBaseChat/LBTAFireBaseChat/Gamification/MathQuestionBuilder.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "39"
-                  endingLineNumber = "39"
-                  offsetFromSymbolStart = "1240">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -112,8 +80,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "224"
             endingLineNumber = "224"
-            landmarkName = "body"
-            landmarkType = "24">
+            landmarkName = "clearAllFirestoreData()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

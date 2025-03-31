@@ -17,6 +17,11 @@ struct ChatMessage: Codable, Identifiable {
     let messageImageUrl: String?
     let isForwarded: Bool?
     let originalSender: String?
+    let originalSenderEmail: String?
+    
+    var isFromCurrentUser: Bool {
+        fromId == FirebaseManager.shared.auth.currentUser?.uid
+    }
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -28,6 +33,7 @@ struct ChatMessage: Codable, Identifiable {
         case messageImageUrl
         case isForwarded
         case originalSender
+        case originalSenderEmail
     }
     
     init(from decoder: Decoder) throws {
@@ -41,5 +47,6 @@ struct ChatMessage: Codable, Identifiable {
         messageImageUrl = try container.decodeIfPresent(String.self, forKey: .messageImageUrl)
         isForwarded = try container.decodeIfPresent(Bool.self, forKey: .isForwarded)
         originalSender = try container.decodeIfPresent(String.self, forKey: .originalSender)
+        originalSenderEmail = try container.decodeIfPresent(String.self, forKey: .originalSenderEmail)
     }
 }

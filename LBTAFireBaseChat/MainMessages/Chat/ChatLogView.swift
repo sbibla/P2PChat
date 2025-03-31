@@ -127,7 +127,7 @@ class ChatLogViewModel: ObservableObject {
         print("sending: \(chatText) from:\(fromId) to:\(toId) canForward:\(messagePermissions) Image:\(messageImageUrl)")
         
         let messageData = [FirebaseConstants.fromId: fromId, FirebaseConstants.toId: toId, FirebaseConstants.text: self.chatText, FirebaseConstants.timestamp: Timestamp(), FirebaseConstants.allowForwardMsg: messagePermissions, "messageImageUrl": messageImageUrl] as [String : Any]
-        try? document.setData(messageData) { error in
+        document.setData(messageData) { error in
             if let error = error {
                 print(error)
                 self.errorMessage = "Failed to save message to sender firestore \(error)"
@@ -209,6 +209,123 @@ class ChatLogViewModel: ObservableObject {
     }
     
     @Published var count = 0
+    
+    func clearAllFirestoreData() {
+        let db = FirebaseManager.shared.firestore
+        
+        // Clear messages collection
+        db.collection(FirebaseConstants.messages).getDocuments { [weak self] (snapshot, error) in
+            if let error = error {
+                print("Error getting messages: \(error)")
+                return
+            }
+            
+            let batch = db.batch()
+            for document in snapshot!.documents {
+                // Delete all subcollections
+                document.reference.getCollections { collections, error in
+                    if let error = error {
+                        print("Error getting collections: \(error)")
+                        return
+                    }
+                    
+                    for collection in collections ?? [] {
+                        collection.getDocuments { documents, error in
+                            if let error = error {
+                                print("Error getting documents: \(error)")
+                                return
+                            }
+                            
+                            for doc in documents ?? [] {
+                                doc.reference.delete { error in
+                                    if let error = error {
+                                        print("Error deleting document: \(error)")
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                batch.deleteDocument(document.reference)
+            }
+            
+            batch.commit { error in
+                if let error = error {
+                    print("Error committing batch: \(error)")
+                } else {
+                    print("Successfully cleared messages collection")
+                }
+            }
+        }
+        
+        // Clear recent messages collection
+        db.collection(FirebaseConstants.recent_messages).getDocuments { [weak self] (snapshot, error) in
+            if let error = error {
+                print("Error getting recent messages: \(error)")
+                return
+            }
+            
+            let batch = db.batch()
+            for document in snapshot!.documents {
+                // Delete all subcollections
+                document.reference.getCollections { collections, error in
+                    if let error = error {
+                        print("Error getting collections: \(error)")
+                        return
+                    }
+                    
+                    for collection in collections ?? [] {
+                        collection.getDocuments { documents, error in
+                            if let error = error {
+                                print("Error getting documents: \(error)")
+                                return
+                            }
+                            
+                            for doc in documents ?? [] {
+                                doc.reference.delete { error in
+                                    if let error = error {
+                                        print("Error deleting document: \(error)")
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                batch.deleteDocument(document.reference)
+            }
+            
+            batch.commit { error in
+                if let error = error {
+                    print("Error committing batch: \(error)")
+                } else {
+                    print("Successfully cleared recent messages collection")
+                }
+            }
+        }
+        
+        // Clear users collection
+        db.collection("users").getDocuments { [weak self] (snapshot, error) in
+            if let error = error {
+                print("Error getting users: \(error)")
+                return
+            }
+            
+            let batch = db.batch()
+            for document in snapshot!.documents {
+                batch.deleteDocument(document.reference)
+            }
+            
+            batch.commit { error in
+                if let error = error {
+                    print("Error committing batch: \(error)")
+                } else {
+                    print("Successfully cleared users collection")
+                }
+            }
+        }
+    }
 }
 
 struct ChatLogView: View {
@@ -218,6 +335,7 @@ struct ChatLogView: View {
     @State private var shouldShowForwardSheet = false
     @State private var selectedMessage: ChatMessage?
     @State private var forwardViewModel = ForwardMessageViewModel()
+    @State private var showingClearDataAlert = false
     
     var body: some View {
         ZStack {
@@ -228,6 +346,24 @@ struct ChatLogView: View {
         .navigationBarTitleDisplayMode(.inline)
         .onDisappear {
             vm.firestoreListener?.remove()
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {
+                    showingClearDataAlert = true
+                }) {
+                    Image(systemName: "trash")
+                        .foregroundColor(.red)
+                }
+            }
+        }
+        .alert("Clear All Data", isPresented: $showingClearDataAlert) {
+            Button("Cancel", role: .cancel) { }
+            Button("Clear All Data", role: .destructive) {
+                vm.clearAllFirestoreData()
+            }
+        } message: {
+            Text("This will permanently delete all messages and user data from Firestore. This action cannot be undone.")
         }
     }
     
@@ -305,6 +441,8 @@ struct MessageView: View {
     @State private var shouldShowForwardSheet = false
     @ObservedObject var forwardViewModel = CreateNewMessageViewModel()
     @State private var originalSenderEmail: String = ""
+    @State private var selectedMessage: ChatMessage?
+    @State private var errorMessage = ""
     
     let message: ChatMessage
     
@@ -315,7 +453,7 @@ struct MessageView: View {
             }
             
             VStack(alignment: message.isFromCurrentUser ? .trailing : .leading) {
-                if message.isForwarded {
+                if message.isForwarded ?? false {
                     Text("Forwarded: \(message.originalSenderEmail ?? "")")
                         .font(.caption)
                         .foregroundColor(.gray)
@@ -327,7 +465,7 @@ struct MessageView: View {
                             .foregroundColor(.black)
                     }
                     
-                    if message.isFromCurrentUser && message.messageCanForwared == "Y" {
+                    if message.isFromCurrentUser && message.allowForwardMsg == "Y" {
                         Button {
                             selectedMessage = message
                             shouldShowForwardSheet = true

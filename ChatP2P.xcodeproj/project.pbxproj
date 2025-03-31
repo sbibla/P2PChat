@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		640813C32D9B534500F5E016 /* ForwardMessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640813C22D9B534500F5E016 /* ForwardMessageViewModel.swift */; };
+		640813C72D9B574D00F5E016 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640813C52D9B574D00F5E016 /* SettingsView.swift */; };
 		642A65922B5B180500BBDF62 /* RecentMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642A65912B5B180500BBDF62 /* RecentMessage.swift */; };
 		642A65A62B5DC27F00BBDF62 /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642A65A52B5DC27F00BBDF62 /* ChatMessage.swift */; };
 		642DC5292B572F6F00A3F8C7 /* ChatLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642DC5282B572F6F00A3F8C7 /* ChatLogView.swift */; };
@@ -57,6 +59,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		640813C22D9B534500F5E016 /* ForwardMessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForwardMessageViewModel.swift; sourceTree = "<group>"; };
+		640813C52D9B574D00F5E016 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		642A65912B5B180500BBDF62 /* RecentMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentMessage.swift; sourceTree = "<group>"; };
 		642A65A52B5DC27F00BBDF62 /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
 		642DC5282B572F6F00A3F8C7 /* ChatLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLogView.swift; sourceTree = "<group>"; };
@@ -117,10 +121,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		640813C62D9B574D00F5E016 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				640813C52D9B574D00F5E016 /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		642DC5272B572F4C00A3F8C7 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
 				642DC5282B572F6F00A3F8C7 /* ChatLogView.swift */,
+				640813C22D9B534500F5E016 /* ForwardMessageViewModel.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -223,6 +236,7 @@
 				642DC5272B572F4C00A3F8C7 /* Chat */,
 				648464792B46A8DF0031AC5B /* NewMessage */,
 				64FDB4F52B438D9E006F41F3 /* MainMessagesView.swift */,
+				640813C62D9B574D00F5E016 /* Settings */,
 			);
 			path = MainMessages;
 			sourceTree = "<group>";
@@ -310,7 +324,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1510;
-				LastUpgradeCheck = 1510;
+				LastUpgradeCheck = 1620;
 				TargetAttributes = {
 					64A2E1212B3D20A90067299C = {
 						CreatedOnToolsVersion = 15.1;
@@ -383,12 +397,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				640813C72D9B574D00F5E016 /* SettingsView.swift in Sources */,
 				648464B82B4BC0140031AC5B /* MathQuestionBuilder.swift in Sources */,
 				642DC5292B572F6F00A3F8C7 /* ChatLogView.swift in Sources */,
 				648464782B4553410031AC5B /* ChatUser.swift in Sources */,
 				64B512B92B7458AD00212498 /* Buttons.swift in Sources */,
 				64FDB4E42B3E5EC7006F41F3 /* ImagePicker.swift in Sources */,
 				64FDB4F62B438D9E006F41F3 /* MainMessagesView.swift in Sources */,
+				640813C32D9B534500F5E016 /* ForwardMessageViewModel.swift in Sources */,
 				64FDB4F92B451E4C006F41F3 /* FirebaseManager.swift in Sources */,
 				6484647B2B46A9080031AC5B /* CreateNewMessageView.swift in Sources */,
 				64A2E1282B3D20A90067299C /* LoginView.swift in Sources */,
@@ -615,7 +631,6 @@
 		64A2E14A2B3D20AA0067299C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -635,7 +650,6 @@
 		64A2E14B2B3D20AA0067299C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -655,7 +669,6 @@
 		64A2E14D2B3D20AA0067299C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = FN7XQ5XQEY;
@@ -673,7 +686,6 @@
 		64A2E14E2B3D20AA0067299C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = FN7XQ5XQEY;
